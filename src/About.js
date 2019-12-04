@@ -18,7 +18,7 @@ const styles = theme => ({
 });
 
 const About = props => {
-  const [resource, setResource] = useState({});
+  const [resource, setResource] = useState({markdown:"Hello **World**"});
   const { classes, user } = props;
   function onSave(markdown, raw) {
     setResource({raw, markdown});
