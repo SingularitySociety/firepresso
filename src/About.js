@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Header from './Header';
 import Grid from '@material-ui/core/Grid';
 import MarkdownViewer from './packaged/markdown/MarkdownViewer';
@@ -21,14 +20,19 @@ const styles = theme => ({
 
 const About = props => {
   const { classes, user } = props;
+  function onSave(markdown, raw) {
+    console.log(markdown);
+  }
+  function onCancel(markdown, raw) {
+    console.log(markdown);
+  }
   return (
     <React.Fragment>
       <Header user={user} login="/Login/target/about" />
       <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
         <Grid className={classes.caption}>
-        <Typography component="h2" variant="h5" gutterBottom>
-          Stay Hungry, Stay Foolish. 
-        </Typography>
+          <MarkdownEditor resource={{}} onSave={onSave} onCancel={onCancel}/>
+          <MarkdownViewer resource={{}} />
         </Grid>
       </Grid>
     </React.Fragment>
