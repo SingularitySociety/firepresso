@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Header from './Header';
@@ -19,20 +19,21 @@ const styles = theme => ({
 });
 
 const About = props => {
+  const [resource, setResource] = useState({});
   const { classes, user } = props;
   function onSave(markdown, raw) {
-    console.log(markdown);
+    setResource({raw, markdown});
   }
   function onCancel(markdown, raw) {
-    console.log(markdown);
+    // no operation
   }
   return (
     <React.Fragment>
       <Header user={user} login="/Login/target/about" />
       <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
         <Grid className={classes.caption}>
-          <MarkdownEditor resource={{}} onSave={onSave} onCancel={onCancel}/>
-          <MarkdownViewer resource={{}} />
+          <MarkdownEditor resource={resource} onSave={onSave} onCancel={onCancel}/>
+          <MarkdownViewer resource={resource} />
         </Grid>
       </Grid>
     </React.Fragment>
