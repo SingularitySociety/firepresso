@@ -12,8 +12,7 @@ const styles = theme => ({
     padding: theme.spacing(1),
     paddingTop: theme.spacing(10),
   },
-  caption: {
-    textAlign: "center",
+  contents: {
     width: "100%",
   },
 });
@@ -31,7 +30,7 @@ const About = props => {
     <React.Fragment>
       <Header user={user} login="/Login/target/about" />
       <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
-        <Grid className={classes.caption}>
+        <Grid className={classes.contents}>
           <MarkdownEditor resource={resource} onSave={onSave} onCancel={onCancel}/>
           <MarkdownViewer resource={resource} />
         </Grid>
