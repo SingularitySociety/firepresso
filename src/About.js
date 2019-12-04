@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Header from './Header';
 import Grid from '@material-ui/core/Grid';
+import MarkdownViewer from './packaged/markdown/MarkdownViewer';
+import MarkdownEditor from './packaged/markdown/MarkdownEditor';
 
 const styles = theme => ({
   root: {

@@ -10,7 +10,10 @@
     "react-dom": "^16.8.6",
     "react-firebaseui": "^3.1.2",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "draft-js": "^0.10.5",
+    "draft-js-export-markdown": "^1.3.3",
+    "draft-js-import-markdown": "^1.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
