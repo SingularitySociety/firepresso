@@ -25,7 +25,7 @@ function Home(props) {
       <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
           <Grid className={classes.caption}>
           <Typography component="h2" variant="h5" gutterBottom>
-            Welcome to Firebase Starter Kit! 
+            Welcome to Firepresso! 
           </Typography>
           </Grid>
       </Grid>
