@@ -30,10 +30,6 @@ function Articles(props) {
     return <Redirect to={redirect} />
   }
   //const context = { user, db };
-  if (true) {
-    return <CreateNew createNew={ createArticle } 
-      action="create" label="article" />;
-  }
   return (
     <Grid container justify="center" spacing={1}>
       <Grid item xs={12} style={{textAlign:"center"}}>
