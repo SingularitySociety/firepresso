@@ -4,6 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header';
 import { Typography } from '@material-ui/core';
+import Articles from './blog/Articles';
+import CommonFrame from './CommonFrame';
 
 const styles = theme => ({
   root: {
@@ -18,18 +20,23 @@ const styles = theme => ({
 });
 
 function Home(props) {
-  const { classes, user } = props;
+  const { classes, user, db } = props;
+  const message = (
+    <Grid className={classes.caption}>
+      <Typography component="h2" variant="h5" gutterBottom>
+        Welcome to Firepresso! Please login.
+      </Typography>
+    </Grid>
+  );
+  const articles = (
+    <Grid className={classes.caption}>
+      <Articles user={user} db={db} />
+    </Grid>
+  );
   return (
-    <React.Fragment>
-      <Header user={user} />
-      <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
-          <Grid className={classes.caption}>
-          <Typography component="h2" variant="h5" gutterBottom>
-            Welcome to Firepresso! 
-          </Typography>
-          </Grid>
-      </Grid>
-    </React.Fragment>
+    <CommonFrame user={user}>
+      { user ? articles : message }
+    </CommonFrame>
   );
 }
 
