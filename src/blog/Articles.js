@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-//import ArticleList from './ArticleList';
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import CreateNew from '../common/CreateNew';
 import { FormattedMessage } from 'react-intl';
 import { Grid } from '@material-ui/core';
 import { Redirect } from 'react-router-dom';
+import ArticleItem from './ArticleItem';
 
 const styles = theme => ({
 });
@@ -32,7 +32,7 @@ function Articles(props) {
       setError(e);
     });
     return detacher;
-  }, [db]);
+  }, [db, user.uid]);
 
   const createArticle = async (title) => {
     const doc = await db.collection(`users/${user.uid}/articles`).add({
@@ -58,8 +58,8 @@ function Articles(props) {
       <Grid item xs={12}>
       {
         list.map((article)=>{
-          return <p key={article.articleId}>{article.title}</p>
-          //return <ArticleItem key={article.articleId} article={article} {...context} />
+          return <ArticleItem key={article.articleId} 
+                    article={article} authorId={user.uid} />
         })
       }
       </Grid>
