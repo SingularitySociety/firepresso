@@ -19,15 +19,23 @@ const styles = theme => ({
 
 function Home(props) {
   const { classes, user } = props;
+  const message = (
+    <Grid className={classes.caption}>
+      <Typography component="h2" variant="h5" gutterBottom>
+        Welcome to Firepresso! Please login.
+      </Typography>
+    </Grid>
+  );
+  const articles = (
+    <Grid className={classes.caption}>
+      <p>Articles</p>
+    </Grid>
+  );
   return (
     <React.Fragment>
       <Header user={user} />
       <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
-          <Grid className={classes.caption}>
-          <Typography component="h2" variant="h5" gutterBottom>
-            Welcome to Firepresso! 
-          </Typography>
-          </Grid>
+        { user ? articles : message }
       </Grid>
     </React.Fragment>
   );
