@@ -23,7 +23,7 @@ function Articles(props) {
       owner: user.uid,
       sections: [], // ordered list of sectionIds
     });
-    setRedirect(`/${user.uid}/${doc.id}`);
+    setRedirect(`/article/${doc.id}`);
   }
 
   if (redirect) {
