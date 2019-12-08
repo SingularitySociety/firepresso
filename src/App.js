@@ -57,7 +57,7 @@ function App() {
         <Router>
           <Route exact path="/" render={(props) => <Home {...props} {...params} />} />
           <Route exact path="/about" render={(props) => <About {...props} {...params} />} />
-          <Route exact path="/article/:articleId" render={(props) => <Article {...props} {...params} />} />
+          <Route exact path="/article/:userId/:articleId" render={(props) => <Article {...props} {...params} />} />
           <Route exact path="/login" render={(props) => <Login {...props} {...params} />} />
           <Route exact path="/login/cmd/:encoded" render={(props) => <Login {...props} {...params} />} />
           <Route exact path="/login/target/:target" render={(props) => <Login {...props} {...params} />} />
