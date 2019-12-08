@@ -2,17 +2,44 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import useOnDocument from '../common/useOnDocument';
+import { Typography, Grid, IconButton } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
+import EditIcon from '@material-ui/icons/Edit';
+import { Link } from 'react-router-dom';
 
 const styles = theme => ({
+  readerFrame: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+  },
+  editorFrame: {
+
+  },
+  title: {
+    fontWeight: "600",
+    marginBottom: theme.spacing(2),
+    fontSize: "1.4rem",
+    '@media (min-width:480px)': {
+      fontSize: '1.8rem',
+    },
+  },
+  userFrame: {
+    marginBottom: theme.spacing(2),
+  },
+  userName: {
+    //color: "#606060",
+    marginLeft: theme.spacing(1),
+  },
 });
 
 function Article(props) {
-  const { db, user, match } = props;
+  const { db, user, match, classes } = props;
   const { userId, articleId } = match.params;
   const pathArticle = `/users/${userId}/articles/${articleId}`;
   const refArticle = db.doc(pathArticle);
   const [ article, err ] = useOnDocument(db, pathArticle);
   const [ sections, setSections ] = useState(null);
+  const [ readOnly, setReadOnly ] = useState(true);
   console.log("article=", article);
   useEffect(() => {
     // Note: We can refArticle. Otherwise, useEffect will called for each render.
@@ -67,9 +94,36 @@ function Article(props) {
     await spliceSections(index, 1);
     await refArticle.collection("sections").doc(resourceId).delete();
   }
+  const toggleReadOnly = () => {
+    setReadOnly(!readOnly);
+  }
 
-  return <p>Artticle {articleId}</p>;
+  if (!article) {
+    return "";
+  }
 
+  const canEdit = (user && article.owner === user.uid);
+  const editMode = canEdit && !readOnly;
+  const frameClass = canEdit ? classes.editorFrame : classes.readerFrame;
+
+  return (
+    <div className={frameClass}>
+      <Grid container>
+        <Grid item xs={canEdit ? 10 : 12}>
+            <Typography component="h1" variant="h1" gutterBottom className={classes.title}>
+            {article.title}
+          </Typography>
+        </Grid>
+        {
+          canEdit && 
+          <Grid item xs={1}>
+            <IconButton size="small" onClick={toggleReadOnly}>
+              <EditIcon />
+            </IconButton>
+          </Grid>
+        }
+      </Grid>
+    </div>);
   Article.propTypes = {
     classes: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
