@@ -5,6 +5,7 @@ import Grid from '@material-ui/core/Grid';
 import Header from './Header';
 import { Typography } from '@material-ui/core';
 import Articles from './blog/Articles';
+import CommonFrame from './CommonFrame';
 
 const styles = theme => ({
   root: {
@@ -35,9 +36,9 @@ function Home(props) {
   return (
     <React.Fragment>
       <Header user={user} />
-      <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
+      <CommonFrame>
         { user ? articles : message }
-      </Grid>
+      </CommonFrame>
     </React.Fragment>
   );
 }
