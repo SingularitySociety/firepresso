@@ -17,7 +17,6 @@ function Articles(props) {
   const [redirect, setRedirect] = useState(null);
 
   const createArticle = async (title) => {
-    console.log(arp);
     const doc = await db.collection(`users/${user.id}/articles`).add({
       title,
       created: firebase.firestore.FieldValue.serverTimestamp(),
@@ -31,11 +30,15 @@ function Articles(props) {
     return <Redirect to={redirect} />
   }
   //const context = { user, db };
+  if (true) {
+    return <CreateNew createNew={ createArticle } 
+      action="create" label="article" />;
+  }
   return (
     <Grid container justify="center" spacing={1}>
       <Grid item xs={12} style={{textAlign:"center"}}>
         <CreateNew createNew={ createArticle } 
-            action={<FormattedMessage id="create" />} label={<FormattedMessage id={arp.tabLeaf} />}/>
+            action={<FormattedMessage id="create" />} label={<FormattedMessage id="article" />}/>
       </Grid>
       <Grid item xs={12}>
       </Grid>
@@ -45,7 +48,7 @@ function Articles(props) {
 
 Articles.propTypes = {
     classes: PropTypes.object.isRequired,
-    arp: PropTypes.object.isRequired,
+    db: PropTypes.object.isRequired,
   };
   
 export default withStyles(styles)(Articles);

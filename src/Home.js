@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header';
 import { Typography } from '@material-ui/core';
+import Articles from './blog/Articles';
 
 const styles = theme => ({
   root: {
@@ -18,7 +19,7 @@ const styles = theme => ({
 });
 
 function Home(props) {
-  const { classes, user } = props;
+  const { classes, user, db } = props;
   const message = (
     <Grid className={classes.caption}>
       <Typography component="h2" variant="h5" gutterBottom>
@@ -28,7 +29,7 @@ function Home(props) {
   );
   const articles = (
     <Grid className={classes.caption}>
-      <p>Articles</p>
+      <Articles user={user} db={db} />
     </Grid>
   );
   return (
