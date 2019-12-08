@@ -8,6 +8,7 @@ import Home from './Home';
 import About from './About';
 import Login from './Login';
 import Decoder from './Decoder';
+import Article from './blog/Article';
 import * as firebase from "firebase/app";
 import "firebase/firestore";
 import config from './config';
@@ -56,6 +57,7 @@ function App() {
         <Router>
           <Route exact path="/" render={(props) => <Home {...props} {...params} />} />
           <Route exact path="/about" render={(props) => <About {...props} {...params} />} />
+          <Route exact path="/article/:articleId" render={(props) => <Article {...props} {...params} />} />
           <Route exact path="/login" render={(props) => <Login {...props} {...params} />} />
           <Route exact path="/login/cmd/:encoded" render={(props) => <Login {...props} {...params} />} />
           <Route exact path="/login/target/:target" render={(props) => <Login {...props} {...params} />} />
