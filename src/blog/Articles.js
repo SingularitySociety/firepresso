@@ -17,7 +17,7 @@ function Articles(props) {
   const [redirect, setRedirect] = useState(null);
 
   const createArticle = async (title) => {
-    const doc = await db.collection(`users/${user.id}/articles`).add({
+    const doc = await db.collection(`users/${user.uid}/articles`).add({
       title,
       created: firebase.firestore.FieldValue.serverTimestamp(),
       owner: user.uid,
@@ -45,6 +45,7 @@ function Articles(props) {
 Articles.propTypes = {
     classes: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
   };
   
 export default withStyles(styles)(Articles);
