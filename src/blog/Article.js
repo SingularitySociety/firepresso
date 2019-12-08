@@ -106,12 +106,19 @@ function Article(props) {
     spliceSections(index, 0, doc.id);
     */
   }
+  const onImageUpload = async (resourceId, imageUrl) => {
+    /*
+    await refArticle.collection("sections").doc(resourceId).set({
+      hasImage: true, imageUrl
+    }, {merge:true})
+    */
+  }
   const toggleReadOnly = () => {
     setReadOnly(!readOnly);
   }
 
-  if (!article) {
-    return "";
+  if (!article || !sections) {
+    return ""; // loading...
   }
 
   const canEdit = (user && article.owner === user.uid);
@@ -139,6 +146,18 @@ function Article(props) {
       {
         editMode && 
         <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
+      }
+      {
+        article.sections.map((sectionId, index)=>{
+          return <div key={sectionId}>
+            <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] } 
+                saveSection={updateSection} deleteSection={deleteSection} 
+                insertImage={insertImage} onImageUpload={onImageUpload} 
+                readOnly={!editMode} {...context} />
+            { editMode && <BlogSection index={ index+1 } resource={{}}
+                insertImage={insertImage} saveSection={insertSection} {...context} /> }
+          </div>
+        })
       }
     </div>);
   Article.propTypes = {
