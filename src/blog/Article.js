@@ -95,7 +95,6 @@ function Article(props) {
     await refArticle.collection("sections").doc(resourceId).delete();
   }
   const insertImage = async (index) => {
-    /*
     console.log("insertImage", index);
     const doc = await refArticle.collection("sections").add({
       type: "image",
@@ -103,14 +102,11 @@ function Article(props) {
       author: user.uid,
     });
     spliceSections(index, 0, doc.id);
-    */
   }
   const onImageUpload = async (resourceId, imageUrl) => {
-    /*
     await refArticle.collection("sections").doc(resourceId).set({
       hasImage: true, imageUrl
     }, {merge:true})
-    */
   }
   const toggleReadOnly = () => {
     setReadOnly(!readOnly);

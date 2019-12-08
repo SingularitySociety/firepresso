@@ -6,7 +6,7 @@ import PhotoIcon from '@material-ui/icons/AddPhotoAlternate';
 import EditIcon from '@material-ui/icons/Edit';
 import MarkdownViewer from '../packaged/markdown/MarkdownViewer';
 import MarkdownEditor from '../packaged/markdown/MarkdownEditor';
-//import ImageUploader from '../../common/ImageUploader';
+import ImageUploader from '../common/ImageUploader';
 
 function BlogSection(props) {
   const [editing, setEditing] = useState(false);
@@ -39,7 +39,6 @@ function BlogSection(props) {
   }
 
   if (sectionId) {
-    /*
     if (resource.type==="image") {
       if (readOnly && !resource.hasImage) {
         return "";
@@ -52,7 +51,7 @@ function BlogSection(props) {
             readOnly={readOnly} displayMode="wide" onImageUpload={onImageUpload} deleteImage={onDelete} />
       );
     }
-    */
+    
     const textWidth = readOnly ? 12 : 11;
     return <Grid container justify="center">
       <Grid item xs={textWidth} style={{padding:"1px"}}>
