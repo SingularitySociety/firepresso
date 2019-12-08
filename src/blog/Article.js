@@ -3,10 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import useOnDocument from '../common/useOnDocument';
 import { Typography, Grid, IconButton } from '@material-ui/core';
-import SettingsIcon from '@material-ui/icons/Settings';
 import EditIcon from '@material-ui/icons/Edit';
-import { Link } from 'react-router-dom';
 import BlogSection from './BlogSection';
+import Header from '../Header';
 
 const styles = theme => ({
   readerFrame: {
@@ -127,39 +126,43 @@ function Article(props) {
   const context = { pathArticle:refArticle.path };
 
   return (
-    <div className={frameClass}>
-      <Grid container>
-        <Grid item xs={canEdit ? 10 : 12}>
-            <Typography component="h1" variant="h1" gutterBottom className={classes.title}>
-            {article.title}
-          </Typography>
+    <React.Fragment>
+      <Header user={user} />
+      <div className={frameClass}>
+        <Grid container>
+          <Grid item xs={canEdit ? 10 : 12}>
+              <Typography component="h1" variant="h1" gutterBottom className={classes.title}>
+              {article.title}
+            </Typography>
+          </Grid>
+          {
+            canEdit && 
+            <Grid item xs={1}>
+              <IconButton size="small" onClick={toggleReadOnly}>
+                <EditIcon />
+              </IconButton>
+            </Grid>
+          }
         </Grid>
         {
-          canEdit && 
-          <Grid item xs={1}>
-            <IconButton size="small" onClick={toggleReadOnly}>
-              <EditIcon />
-            </IconButton>
-          </Grid>
+          editMode && 
+          <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
         }
-      </Grid>
-      {
-        editMode && 
-        <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
-      }
-      {
-        article.sections.map((sectionId, index)=>{
-          return <div key={sectionId}>
-            <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] } 
-                saveSection={updateSection} deleteSection={deleteSection} 
-                insertImage={insertImage} onImageUpload={onImageUpload} 
-                readOnly={!editMode} {...context} />
-            { editMode && <BlogSection index={ index+1 } resource={{}}
-                insertImage={insertImage} saveSection={insertSection} {...context} /> }
-          </div>
-        })
-      }
-    </div>);
+        {
+          article.sections.map((sectionId, index)=>{
+            return <div key={sectionId}>
+              <BlogSection index={ index } sectionId={sectionId} resource={ sections[sectionId] } 
+                  saveSection={updateSection} deleteSection={deleteSection} 
+                  insertImage={insertImage} onImageUpload={onImageUpload} 
+                  readOnly={!editMode} {...context} />
+              { editMode && <BlogSection index={ index+1 } resource={{}}
+                  insertImage={insertImage} saveSection={insertSection} {...context} /> }
+            </div>
+          })
+        }
+      </div>
+    </React.Fragment>
+);
   Article.propTypes = {
     classes: PropTypes.object.isRequired,
     db: PropTypes.object.isRequired,
