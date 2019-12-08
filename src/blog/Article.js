@@ -5,7 +5,7 @@ import useOnDocument from '../common/useOnDocument';
 import { Typography, Grid, IconButton } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 import BlogSection from './BlogSection';
-import Header from '../Header';
+import CommonFrame from '../CommonFrame';
 
 const styles = theme => ({
   readerFrame: {
@@ -126,8 +126,7 @@ function Article(props) {
   const context = { pathArticle:refArticle.path };
 
   return (
-    <React.Fragment>
-      <Header user={user} />
+    <CommonFrame user={user}>
       <div className={frameClass}>
         <Grid container>
           <Grid item xs={canEdit ? 10 : 12}>
@@ -161,7 +160,7 @@ function Article(props) {
           })
         }
       </div>
-    </React.Fragment>
+    </CommonFrame>
 );
   Article.propTypes = {
     classes: PropTypes.object.isRequired,

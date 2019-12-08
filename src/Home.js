@@ -34,12 +34,9 @@ function Home(props) {
     </Grid>
   );
   return (
-    <React.Fragment>
-      <Header user={user} />
-      <CommonFrame>
-        { user ? articles : message }
-      </CommonFrame>
-    </React.Fragment>
+    <CommonFrame user={user}>
+      { user ? articles : message }
+    </CommonFrame>
   );
 }
 

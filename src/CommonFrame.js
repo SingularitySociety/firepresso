@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import Header from './Header';
 
 const styles = theme => ({
   root: {
@@ -20,12 +21,17 @@ const styles = theme => ({
 });
 
 function CommonFramme(props) {
-  const { classes } = props;
-  return  <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
-      <Grid item className={ classes.main }>
-        { props.children }
+  const { classes, user } = props;
+  return (
+    <React.Fragment>
+      <Header user={user} />
+      <Grid container justify="center" alignItems="center" direction="row" className={classes.root}>
+        <Grid item className={ classes.main }>
+          { props.children }
+        </Grid>
       </Grid>
-    </Grid>;
+    </React.Fragment>
+  );
 }
 
 CommonFramme.propTypes = {
