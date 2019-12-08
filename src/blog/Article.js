@@ -40,7 +40,7 @@ function Article(props) {
   const [ article, err ] = useOnDocument(db, pathArticle);
   const [ sections, setSections ] = useState(null);
   const [ readOnly, setReadOnly ] = useState(true);
-  console.log("article=", article);
+
   useEffect(() => {
     // Note: We can refArticle. Otherwise, useEffect will called for each render.
     const detatcher = db.collection(`${pathArticle}/sections`).onSnapshot((snapshot)=>{
