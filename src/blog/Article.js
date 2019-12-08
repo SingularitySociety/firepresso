@@ -125,7 +125,7 @@ function Article(props) {
     <CommonFrame user={user}>
       <div className={frameClass}>
         <Grid container>
-          <Grid item xs={canEdit ? 10 : 12}>
+          <Grid item xs={canEdit ? 11 : 12}>
               <Typography component="h1" variant="h1" gutterBottom className={classes.title}>
               {article.title}
             </Typography>
