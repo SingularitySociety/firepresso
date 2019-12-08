@@ -6,6 +6,7 @@ import { Typography, Grid, IconButton } from '@material-ui/core';
 import SettingsIcon from '@material-ui/icons/Settings';
 import EditIcon from '@material-ui/icons/Edit';
 import { Link } from 'react-router-dom';
+import BlogSection from './BlogSection';
 
 const styles = theme => ({
   readerFrame: {
@@ -94,6 +95,17 @@ function Article(props) {
     await spliceSections(index, 1);
     await refArticle.collection("sections").doc(resourceId).delete();
   }
+  const insertImage = async (index) => {
+    /*
+    console.log("insertImage", index);
+    const doc = await refArticle.collection("sections").add({
+      type: "image",
+      created: new Date(),
+      author: user.uid,
+    });
+    spliceSections(index, 0, doc.id);
+    */
+  }
   const toggleReadOnly = () => {
     setReadOnly(!readOnly);
   }
@@ -105,6 +117,7 @@ function Article(props) {
   const canEdit = (user && article.owner === user.uid);
   const editMode = canEdit && !readOnly;
   const frameClass = canEdit ? classes.editorFrame : classes.readerFrame;
+  const context = { pathArticle:refArticle.path };
 
   return (
     <div className={frameClass}>
@@ -123,6 +136,10 @@ function Article(props) {
           </Grid>
         }
       </Grid>
+      {
+        editMode && 
+        <BlogSection index={ 0 } resource={{}} saveSection={insertSection} insertImage={insertImage} {...context} />
+      }
     </div>);
   Article.propTypes = {
     classes: PropTypes.object.isRequired,
