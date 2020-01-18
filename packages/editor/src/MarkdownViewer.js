@@ -18,7 +18,7 @@ function MarkdownViewer(props) {
     <Editor readOnly={true} 
       blockStyleFn={(contentBlock) => { return blockStyleFn(classes, contentBlock)}}
       editorState={editorState} />
-  )  
+  );
 }
 
 MarkdownViewer.propTypes = {
