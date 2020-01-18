@@ -12,13 +12,13 @@ const decorator = MarkdownDecorator();
 function MarkdownViewer(props) {
   const classes = useStyles();
   const { resource } = props;
-  const contentState = resource.raw ? convertFromRaw(resource.raw) : stateFromMarkdown(resource.markdown || "");
+  const contentState = resource.raw ? convertFromRaw(resource.raw) : stateFromMarkdown(resource.markdown);
   const editorState = EditorState.createWithContent(contentState, decorator);
   return (
     <Editor readOnly={true} 
       blockStyleFn={(contentBlock) => { return blockStyleFn(classes, contentBlock)}}
       editorState={editorState} />
-  )  
+  );
 }
 
 MarkdownViewer.propTypes = {
